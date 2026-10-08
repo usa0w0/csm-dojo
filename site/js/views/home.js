@@ -3,7 +3,7 @@ import { CATEGORIES } from "../questions.js";
 import { load, rateText, summarize, wrongQuestions } from "../store.js";
 
 export function renderHome(root, { questions }) {
-  const { answers } = load();
+  const { answers, examInProgress } = load();
   const all = summarize(questions, answers);
   const wrongCount = wrongQuestions(questions, answers).length;
   const count = (id) => questions.filter((q) => q.category === id).length;
@@ -29,6 +29,8 @@ export function renderHome(root, { questions }) {
       ),
     ),
     start,
+    h("h2", {}, "模擬試験"),
+    h("a", { class: "btn", href: "#/exam" }, examInProgress ? "模擬試験の続きから再開する" : "模擬試験を受ける"),
     h("h2", {}, "復習"),
     wrongCount > 0
       ? h("a", { class: "btn", href: "#/quiz/wrong" }, `間違えた問題だけ出題する（${wrongCount}問）`)
