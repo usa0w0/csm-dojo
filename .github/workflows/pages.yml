@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # 問題がそろうまでは下限を下げておく。そろったら --min を外す（既定は200問）
-      - run: python3 tools/validate_questions.py --min 15
+      - run: python3 tools/validate_questions.py --min 90
 
   deploy:
     if: github.event_name == 'push'
