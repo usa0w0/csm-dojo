@@ -1,11 +1,13 @@
 import { h, mount } from "./dom.js";
 import { loadQuestions } from "./questions.js";
 import { renderHome } from "./views/home.js";
+import { renderQuiz } from "./views/quiz.js";
 import { renderPlaceholder } from "./views/placeholder.js";
 
 // ハッシュの先頭（#/quiz なら "quiz"）で画面を決める
 const routes = {
   "": renderHome,
+  quiz: renderQuiz,
   stats: renderPlaceholder("成績"),
   about: renderPlaceholder("このサイトについて"),
 };
