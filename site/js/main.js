@@ -2,9 +2,9 @@ import { h, mount } from "./dom.js";
 import { loadQuestions } from "./questions.js";
 import { renderHome } from "./views/home.js";
 import { renderQuiz } from "./views/quiz.js";
+import { renderAbout } from "./views/about.js";
 import { renderExam } from "./views/exam.js";
 import { renderStats } from "./views/stats.js";
-import { renderPlaceholder } from "./views/placeholder.js";
 
 // ハッシュの先頭（#/quiz なら "quiz"）で画面を決める
 const routes = {
@@ -12,7 +12,7 @@ const routes = {
   quiz: renderQuiz,
   exam: renderExam,
   stats: renderStats,
-  about: renderPlaceholder("このサイトについて"),
+  about: renderAbout,
 };
 
 const root = document.getElementById("app");
