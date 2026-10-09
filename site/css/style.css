@@ -154,3 +154,18 @@ blockquote {
 }
 
 .score { font-size: 18px; font-weight: 700; }
+
+.btn-danger { color: var(--ng); border-color: var(--ng); }
+
+.stats { width: 100%; border-collapse: collapse; font-size: 14px; }
+.stats th, .stats td { padding: 8px 4px; border-bottom: 1px solid var(--border); text-align: right; }
+.stats th:first-child { text-align: left; font-weight: 400; }
+.stats thead th { color: var(--muted); font-size: 12px; }
+.stats tbody tr:last-child th, .stats tbody tr:last-child td { border-bottom: none; font-weight: 700; }
+
+.mark { flex: none; width: 1.5em; font-weight: 700; }
+.mark.is-correct { color: var(--ok); }
+.mark.is-wrong { color: var(--ng); }
+.history-text { flex: 1; font-size: 14px; }
+.stats th:not(:first-child), .stats td { white-space: nowrap; }
+.list.card { padding: 4px 16px; }
