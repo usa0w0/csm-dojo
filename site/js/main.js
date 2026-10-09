@@ -2,6 +2,7 @@ import { h, mount } from "./dom.js";
 import { loadQuestions } from "./questions.js";
 import { renderHome } from "./views/home.js";
 import { renderQuiz } from "./views/quiz.js";
+import { renderExam } from "./views/exam.js";
 import { renderStats } from "./views/stats.js";
 import { renderPlaceholder } from "./views/placeholder.js";
 
@@ -9,18 +10,23 @@ import { renderPlaceholder } from "./views/placeholder.js";
 const routes = {
   "": renderHome,
   quiz: renderQuiz,
+  exam: renderExam,
   stats: renderStats,
   about: renderPlaceholder("このサイトについて"),
 };
 
 const root = document.getElementById("app");
+// 画面が返した後片付け（タイマーの停止など）。次の画面を出す前に呼ぶ
+let cleanup = null;
 
 async function render() {
   const [name = "", ...params] = location.hash.replace(/^#\/?/, "").split("/");
   const view = routes[name] ?? routes[""];
+  cleanup?.();
+  cleanup = null;
   try {
     const questions = await loadQuestions();
-    view(root, { questions, params });
+    cleanup = view(root, { questions, params }) ?? null;
   } catch (e) {
     console.error(e);
     mount(

@@ -6,7 +6,7 @@ const RECENT = 30;
 
 export function renderStats(root, ctx) {
   const { questions } = ctx;
-  const { answers } = load();
+  const { answers, exams } = load();
   const all = summarize(questions, answers);
   const row = (name, s) =>
     h("tr", {}, h("th", { scope: "row" }, name), h("td", {}, rateText(s)), h("td", {}, `${s.correct} / ${s.tries}`), h("td", {}, `${s.answered} / ${s.total}`));
@@ -29,6 +29,22 @@ export function renderStats(root, ctx) {
         h("tbody", {}, CATEGORIES.map((c) => row(c.name, summarize(questions.filter((q) => q.category === c.id), answers))), row("全体", all)),
       ),
     ),
+    h("h2", {}, "模擬試験の結果"),
+    exams.length === 0
+      ? h("p", { class: "muted" }, "まだ受けていない。")
+      : h(
+          "ul",
+          { class: "list card" },
+          [...exams].reverse().map((e) =>
+            h(
+              "li",
+              {},
+              h("span", { class: "muted" }, new Date(e.finishedAt).toLocaleString("ja-JP", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })),
+              h("span", {}, `${e.score} / ${e.total}問`),
+              h("span", { class: e.passed ? "mark-text is-correct" : "mark-text is-wrong" }, e.passed ? "合格" : "不合格"),
+            ),
+          ),
+        ),
     h("h2", {}, `最近の解答（${RECENT}問まで）`),
     recent.length === 0
       ? h("p", { class: "muted" }, "まだ解いていない。")

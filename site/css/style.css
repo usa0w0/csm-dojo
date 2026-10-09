@@ -169,3 +169,41 @@ blockquote {
 .history-text { flex: 1; font-size: 14px; }
 .stats th:not(:first-child), .stats td { white-space: nowrap; }
 .list.card { padding: 4px 16px; }
+
+.mark-text { font-weight: 700; }
+.mark-text.is-correct { color: var(--ok); }
+.mark-text.is-wrong { color: var(--ng); }
+
+.exam-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  margin: -16px -16px 8px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.clock { font-variant-numeric: tabular-nums; font-weight: 700; }
+.clock.is-low { color: var(--ng); }
+
+.row { display: flex; gap: 10px; }
+.row .btn { flex: 1; }
+
+summary { cursor: pointer; }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; }
+.cell {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+}
+.cell.is-done { background: var(--ok-bg); color: var(--text); }
+.cell.is-current { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+
+.review summary { font-size: 14px; }
+.review .mark { display: inline-block; }
